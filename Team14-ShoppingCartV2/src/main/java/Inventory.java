@@ -36,6 +36,10 @@ public class Inventory {
     public Product getProduct(int index){
         return items.get(index);
     }
+    public int getProductQuantity(int index){
+        return stock.get(index);
+    }
+    public ArrayList<Product> getList(){return items;}
 
 
 

@@ -44,16 +44,19 @@ public class SellerLogin extends JFrame implements ActionListener {
                 while(!match && i<sellers.size()){
                     if(userText.getText().equals(sellers.get(i).getUsername()) && passText.getText().equals(sellers.get(i).getPassword())) {
                         match = true;
+                    }else{
+                        i++;
                     }
-                    i++;
                 }
                 if(match){
-                    error.setText("Login Successful");
+                    error.setText("");
                     //Moving current logged in seller to last index on array
                     Seller holder = sellers.get(i);
                     sellers.remove(i);
                     sellers.add(holder);
-                    //cl.show(contentPanel,< >);
+                    userText.setText("");
+                    passText.setText("");
+                    cl.show(contentPanel,"seller menu");
                 }else{
                     error.setText("Invalid Login");
                 }
@@ -71,7 +74,7 @@ public class SellerLogin extends JFrame implements ActionListener {
                 boolean taken = false;
                 int i = 0;
                 while(!taken && i<sellers.size()){
-                    if(userText.getText() == sellers.get(i).getUsername())
+                    if(userText.getText().equals(sellers.get(i).getUsername()))
                         taken = true;
                     i++;
                 }

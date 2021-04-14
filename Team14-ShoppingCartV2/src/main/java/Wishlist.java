@@ -7,8 +7,6 @@ public class Wishlist extends JFrame implements ActionListener {
     JPanel panel;
     JLabel label;
 
-
-
     public Wishlist(ArrayList<Product> wishlist){
         panel = new JPanel();
         panel.setLayout(null);
@@ -21,9 +19,32 @@ public class Wishlist extends JFrame implements ActionListener {
             for(int i = 0,y = 100;i<wishlist.size();i++,y+=50){
                 JLabel item = new JLabel(wishlist.get(i).getID());
                 item.setBounds(200,y,200,50);
-                //Add button to remove from wishlist
+                //Remove from wishlist button
+                int currentItem = i;
+                JButton remove = new JButton( new AbstractAction("Remove") {
+                    @Override
+                    public void actionPerformed( ActionEvent e ) {
+                        System.out.println("Removed: " + wishlist.get(currentItem).getID()+" from wishlist");
+                        item.setText(wishlist.get(currentItem).getID()+"*REMOVED*");
+                        wishlist.remove(currentItem);
+                    }
+                });
+                remove.setBounds(500,y,200,50);
+                panel.add(remove);
             }
         }
+
+        JButton back = new JButton( new AbstractAction("Back") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                System.out.println("Going Back");
+                //(cl.show(contentPanel,"customer ui")
+            }
+        });
+        //back.setBounds();
+        panel.add(back);
+
+
     }
 
     public JPanel getPanel(){

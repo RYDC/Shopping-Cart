@@ -19,6 +19,8 @@ public class main {
          //Inventory... etc etc
         ArrayList<Customer> customers = new ArrayList<Customer>();
         ArrayList<Seller> sellers = new ArrayList<Seller>();
+        Inventory inventory = new Inventory();
+
 
 
 
@@ -26,11 +28,13 @@ public class main {
         loginSelector loginSelectorPanel = new loginSelector(cl,contentPanel);
         CustomerLogin customerLoginPanel = new CustomerLogin(cl,contentPanel,customers);
         SellerLogin sellerLoginPanel = new SellerLogin(cl,contentPanel,sellers);
+        SellerUI sellerMenu = new SellerUI(cl,contentPanel,inventory);
 
         //Adding each panel into content panel
         contentPanel.add(loginSelectorPanel.getPanel(),"start");
         contentPanel.add(customerLoginPanel.getPanel(),"customer login");
         contentPanel.add(sellerLoginPanel.getPanel(),"seller login");
+        contentPanel.add(sellerMenu.getPanel(),"seller menu");
 
         frame.add(contentPanel);
         frame.setVisible(true);
