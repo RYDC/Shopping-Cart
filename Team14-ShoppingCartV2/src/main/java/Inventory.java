@@ -11,9 +11,9 @@ public class Inventory {
         selected_item = 0;
     }
 
-    public void add_item(Product x, int y){
-        items.add(x);
-        stock.add(y);
+    public void add_item(Product item, int quantity){
+        items.add(item);
+        stock.add(quantity);
     }
 
     public void remove_item(int index){
@@ -25,11 +25,13 @@ public class Inventory {
         stock.set(index,amount);
     }
 
-    public void sell(int index, int amount){
+    public boolean sell(int index, int amount){
         if(stock.get(index)<amount){
             stock.set(index,0);
+            return false;
         }else{
             stock.set(index,stock.get(index)-amount);
+            return true;
         }
     }
 

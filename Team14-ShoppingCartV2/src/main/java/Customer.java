@@ -23,5 +23,11 @@ public class Customer {
     }
     public String getUsername(){return username;}
     public String getPassword(){return password;}
+    public void addToCart(int index,Inventory inventory){
+        shoppingCart.add(index,inventory);
+    }
+    public int getTotalCost(){
+        return shoppingCart.getTotalCost();
+    }
 
 }

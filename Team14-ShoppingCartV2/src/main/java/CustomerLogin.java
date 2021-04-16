@@ -54,7 +54,7 @@ public class CustomerLogin extends JFrame implements ActionListener {
                     //Moving current logged in customer to last index on array
                     Customer holder = customers.get(i);
                     customers.remove(i);
-                    customers.add(holder);
+                    customers.add(0,holder);
                     cl.show(contentPanel,"customer menu");
                 }else{
                     error.setText("Invalid Login");

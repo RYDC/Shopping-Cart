@@ -13,14 +13,21 @@ public class Cart {
     }
 
     public void add(int index,Inventory available){
-        items.add(available.getProduct(index));
-        totalCost+=available.getProduct(index).getSellPrice();
-        available.sell(index,1);
+        if(available.sell(index,1)) {
+            items.add(available.getProduct(index));
+            totalCost += available.getProduct(index).getSellPrice();
+        }else{
+            System.out.println("Out of Stock!");
+        }
     }
 
     public void remove(int index){
         totalCost-=items.get(index).getSellPrice();
         items.remove(index);
+    }
+
+    public int getTotalCost(){
+        return totalCost;
     }
 
 
