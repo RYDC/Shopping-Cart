@@ -55,7 +55,7 @@ public class CustomerLogin extends JFrame implements ActionListener {
                     Customer holder = customers.get(i);
                     customers.remove(i);
                     customers.add(holder);
-                    //cl.show(contentPanel,<insert name for the customer ui here>
+                    cl.show(contentPanel,"customer menu");
                 }else{
                     error.setText("Invalid Login");
                 }

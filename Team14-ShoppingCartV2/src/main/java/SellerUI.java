@@ -57,7 +57,7 @@ public class SellerUI {
         panel.add(viewStats);
 
         //Logout
-        JButton logout = new JButton( new AbstractAction("<----") {
+        JButton logout = new JButton( new AbstractAction("Logout") {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 System.out.println("Logout selected");

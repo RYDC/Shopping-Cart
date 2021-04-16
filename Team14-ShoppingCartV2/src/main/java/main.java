@@ -7,7 +7,7 @@ public class main {
 
         //JFrame Setup
         JFrame frame = new JFrame();
-        frame.setSize(1000,750);
+        frame.setSize(1500,750);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Card Layout Setup
@@ -21,6 +21,10 @@ public class main {
         ArrayList<Seller> sellers = new ArrayList<Seller>();
         Inventory inventory = new Inventory();
 
+        //Hard Coded Items
+        Product apple = new Product("Apple",50,50);
+        inventory.add_item(apple,5);
+
 
 
 
@@ -29,12 +33,14 @@ public class main {
         CustomerLogin customerLoginPanel = new CustomerLogin(cl,contentPanel,customers);
         SellerLogin sellerLoginPanel = new SellerLogin(cl,contentPanel,sellers);
         SellerUI sellerMenu = new SellerUI(cl,contentPanel,inventory);
+        CustomerUIMainWindow customerMenu = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
 
         //Adding each panel into content panel
         contentPanel.add(loginSelectorPanel.getPanel(),"start");
         contentPanel.add(customerLoginPanel.getPanel(),"customer login");
         contentPanel.add(sellerLoginPanel.getPanel(),"seller login");
         contentPanel.add(sellerMenu.getPanel(),"seller menu");
+        contentPanel.add(customerMenu.getPanel(),"customer menu");
 
         frame.add(contentPanel);
         frame.setVisible(true);
