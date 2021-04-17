@@ -16,6 +16,8 @@ public class Cart {
         if(available.sell(index,1)) {
             items.add(available.getProduct(index));
             totalCost += available.getProduct(index).getSellPrice();
+            System.out.println("Added " + available.getProduct(index).getID() + " to cart!");
+            System.out.println("Total cost: " + totalCost);
         }else{
             System.out.println("Out of Stock!");
         }

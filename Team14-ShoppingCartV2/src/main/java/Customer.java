@@ -29,5 +29,12 @@ public class Customer {
     public int getTotalCost(){
         return shoppingCart.getTotalCost();
     }
+    public void addToWishlist(Product item){
+        wishlist.add(item);
+        System.out.println("Added " + item.getID() + " to wishlist!");
+    }
+    public ArrayList<Product> getWishlist(){
+        return wishlist;
+    }
 
 }

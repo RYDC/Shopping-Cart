@@ -22,8 +22,11 @@ public class main {
         Inventory inventory = new Inventory();
 
         //Hard Coded Items
-        Product apple = new Product("Apple",50,50);
+        Product apple = new Product("Apple",50,50,"Apple");
         inventory.add_item(apple,5);
+        Product orange = new Product("Orange",50,50,"Orange");
+        inventory.add_item(orange,5);
+
 
 
 
