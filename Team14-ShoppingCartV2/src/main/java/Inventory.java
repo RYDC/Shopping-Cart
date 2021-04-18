@@ -22,7 +22,7 @@ public class Inventory {
     }
 
     public void restock(int index, int amount){
-        stock.set(index,amount);
+        stock.set(index,stock.get(index)+amount);
     }
 
     public boolean sell(int index, int amount){

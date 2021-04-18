@@ -23,14 +23,30 @@ public class Cart {
         }
     }
 
-    public void remove(int index){
+    public void remove(int index,Inventory inventory){
         totalCost-=items.get(index).getSellPrice();
+        String restockID = items.get(index).getID();
         items.remove(index);
+        boolean restocked = false;
+        int i = 0;
+        while(!restocked) {
+            if(restockID.equals(inventory.getProduct(i).getID())) {
+                inventory.restock(i, 1);
+                restocked = true;
+            }
+            i++;
+        }
     }
-
     public int getTotalCost(){
         return totalCost;
     }
+    public ArrayList<Product> getProductList(){
+        return items;
+    }
+    public ArrayList<Integer> getQuantityList(){
+        return quantity;
+    }
+
 
 
 }

@@ -36,5 +36,6 @@ public class Customer {
     public ArrayList<Product> getWishlist(){
         return wishlist;
     }
+    public Cart getCart(){return shoppingCart;}
 
 }

@@ -21,13 +21,11 @@ public class main {
         ArrayList<Seller> sellers = new ArrayList<Seller>();
         Inventory inventory = new Inventory();
 
-        //Hard Coded Items
+        //Hard Coded Items for Inventory
         Product apple = new Product("Apple",50,50,"Apple");
         inventory.add_item(apple,5);
         Product orange = new Product("Orange",50,50,"Orange");
         inventory.add_item(orange,5);
-
-
 
 
 

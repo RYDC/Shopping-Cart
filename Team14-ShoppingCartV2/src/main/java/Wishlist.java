@@ -22,8 +22,6 @@ public class Wishlist extends JFrame implements ActionListener {
         header = new JLabel("Wishlist");
         header.setFont(new Font("Verdana", Font.BOLD, 15));
         header.setHorizontalAlignment(SwingConstants.CENTER);
-        //panel.add(header,BorderLayout.NORTH);
-        //header.setBounds(650,10,100,50);
         panel.add(header,BorderLayout.NORTH);
 
 

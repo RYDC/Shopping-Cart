@@ -50,7 +50,9 @@ public class CustomerUIMainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("View Cart Selected");
-                //cl.show(contentPanel,"start");
+                ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,customers.get(0).getCart(),inventory);
+                contentPanel.add(currentCart.getPanel(),"current cart");
+                cl.show(contentPanel,"current cart");
             }
         });
         viewCart.setBounds(1090, 10, 90, 20);
@@ -69,7 +71,7 @@ public class CustomerUIMainWindow extends JFrame {
         wishlist.setBounds(1180, 10, 90, 20);
         p1.add(wishlist);
 
-
+        //----------------- TABLE -----------------
         ArrayList<Product> products = inventory.getList();
         String[] column = {"Product Name", "Price (USD)", "Add To Cart", "Add To Wishlist"};
         Object[][] row = new Object[products.size()][4];
@@ -82,6 +84,7 @@ public class CustomerUIMainWindow extends JFrame {
         }
         JTable table = new JTable(row, column);
 
+        //Listener for interacting with the menu (add to wishlist, add to cart, view description)
         table.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 Customer currentCustomer = customers.get(0);
