@@ -100,8 +100,7 @@ public class ViewCartUI {
                 public void actionPerformed( ActionEvent e ) {
                     System.out.println("Checkout");
                     if(!cart.getProductList().isEmpty()) {
-                        Checkout window = new Checkout(cl, contentPanel, cart);
-                        cart.clearCart();
+                        Checkout window = new Checkout(cl, contentPanel, cart,inventory,customers);
                         contentPanel.add(window.getPanel(), "checkout");
                         cl.show(contentPanel, "checkout");
                     }else{

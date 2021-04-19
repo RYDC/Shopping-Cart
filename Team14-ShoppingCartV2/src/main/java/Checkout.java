@@ -22,20 +22,23 @@ public class Checkout {
     JLabel header;
     ArrayList<Product> items;
     ArrayList<Integer> stock;
+    boolean transactionComplete;
 
-    public Checkout(CardLayout cl, JPanel contentPanel, Cart cart){
+    public Checkout(CardLayout cl, JPanel contentPanel, Cart cart, Inventory inventory, ArrayList<Customer> customers){
         panel = new JPanel();
         p2 = new JPanel();
         panel.setLayout(new BorderLayout());
         p2.setLayout(new BorderLayout());
 
-        header = new JLabel("Receipt:  Total: $" + cart.getTotalCost());
+        //header = new JLabel("Receipt:  Total: $" + cart.getTotalCost());
+        header = new JLabel("Total: $" + cart.getTotalCost());
         header.setFont(new Font("Verdana", Font.BOLD, 15));
         header.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(header,BorderLayout.NORTH);
 
         items = cart.getProductList();
         stock = cart.getQuantityList();
+        transactionComplete = false;
 
         //Logout Button
         JButton logout = new JButton(new AbstractAction("LOG OUT") {
@@ -71,6 +74,25 @@ public class Checkout {
 
             JScrollPane scrollPane = new JScrollPane(table);
             p2.add(scrollPane,BorderLayout.CENTER);
+
+            JButton cardBtn = new JButton( new AbstractAction("Supply Card Info and Complete Transaction") {
+                @Override
+                public void actionPerformed( ActionEvent e ) {
+                    if(!transactionComplete) {
+                        System.out.println("cardBtn clicked");
+                        header.setText("Receipt:  Total: $" + cart.getTotalCost());
+                        cart.clearCart();
+                        transactionComplete = true;
+                        CustomerUIMainWindow newCustomer = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
+                        contentPanel.add(newCustomer.getPanel(),"customer menu");
+                    }else{
+                        System.out.println("Transaction is already Complete!");
+                    }
+                }
+            });
+            //cardBtn.setBounds(350,100,100,100);
+            panel.add(cardBtn,BorderLayout.SOUTH);
+
 
 
         }
