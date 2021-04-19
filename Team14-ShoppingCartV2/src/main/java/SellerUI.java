@@ -47,7 +47,7 @@ public class SellerUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Add Item Selected");
-                AddItem newItem = new AddItem();
+                AddItem newItem = new AddItem(cl,contentPanel,inventory,customers);
                 //ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,customers.get(0).getCart(),inventory,customers);
                 //contentPanel.add(currentCart.getPanel(),"current cart");
                 //cl.show(contentPanel,"current cart");

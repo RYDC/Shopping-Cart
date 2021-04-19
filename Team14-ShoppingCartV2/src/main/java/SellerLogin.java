@@ -49,13 +49,13 @@ public class SellerLogin extends JFrame implements ActionListener {
                     }
                 }
                 if(match){
-                    error.setText("");
                     //Moving current logged in seller to last index on array
                     Seller holder = sellers.get(i);
                     sellers.remove(i);
                     sellers.add(holder);
                     userText.setText("");
                     passText.setText("");
+                    error.setText("");
                     cl.show(contentPanel,"seller menu");
                 }else{
                     error.setText("Invalid Login");

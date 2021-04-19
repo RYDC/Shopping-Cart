@@ -49,12 +49,13 @@ public class CustomerLogin extends JFrame implements ActionListener {
                     }
                 }
                 if(match){
-                    error.setText("Login Successful");
-
                     //Moving current logged in customer to last index on array
                     Customer holder = customers.get(i);
                     customers.remove(i);
                     customers.add(0,holder);
+                    userText.setText("");
+                    passText.setText("");
+                    error.setText("");
                     cl.show(contentPanel,"customer menu");
                 }else{
                     error.setText("Invalid Login");

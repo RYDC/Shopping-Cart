@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class main {
@@ -8,7 +10,7 @@ public class main {
         //JFrame Setup
         JFrame frame = new JFrame();
         frame.setSize(1500,750);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         //Card Layout Setup
         CardLayout cl = new CardLayout();
@@ -28,7 +30,6 @@ public class main {
         inventory.add_item(orange,5);
 
 
-
         //Creating each panel
         loginSelector loginSelectorPanel = new loginSelector(cl,contentPanel);
         CustomerLogin customerLoginPanel = new CustomerLogin(cl,contentPanel,customers);
@@ -43,7 +44,23 @@ public class main {
         contentPanel.add(sellerMenu.getPanel(),"seller menu");
         contentPanel.add(customerMenu.getPanel(),"customer menu");
 
+        //Custom Termination of program
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.out.println("EXITING!");
+                System.exit(0);
+
+            }
+        });
+
+
+
         frame.add(contentPanel);
         frame.setVisible(true);
+
+
+
+
+
     }
 }
