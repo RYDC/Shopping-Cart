@@ -37,6 +37,12 @@ public class Cart {
             i++;
         }
     }
+    public void clearCart(){
+        items = new ArrayList<Product>();
+        quantity = new ArrayList<Integer>();
+        totalCost = 0;
+    }
+
     public int getTotalCost(){
         return totalCost;
     }

@@ -23,7 +23,7 @@ public class ViewCartUI {
         ArrayList<Product> items;
         ArrayList<Integer> stock;
 
-        public ViewCartUI(CardLayout cl, JPanel contentPanel, Cart cart,Inventory inventory){
+        public ViewCartUI(CardLayout cl, JPanel contentPanel, Cart cart,Inventory inventory,ArrayList<Customer> customers){
             panel = new JPanel();
             p2 = new JPanel();
             panel.setLayout(new BorderLayout());
@@ -73,7 +73,7 @@ public class ViewCartUI {
                             if(column==2){
                                 System.out.println("Removing " + items.get(row).getID() + " from cart");
                                 cart.remove(row,inventory);
-                                ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,cart,inventory);
+                                ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,cart,inventory,customers);
                                 contentPanel.add(currentCart.getPanel(),"current cart");
                                 cl.show(contentPanel,"current cart");
                             }
@@ -87,11 +87,31 @@ public class ViewCartUI {
                 @Override
                 public void actionPerformed( ActionEvent e ) {
                     System.out.println("Going Back");
+                    CustomerUIMainWindow window = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
+                    contentPanel.add(window.getPanel(),"customer menu");
                     cl.show(contentPanel,"customer menu");
                 }
             });
-            back.setBounds(1390,0,90, 20);
+            back.setBounds(1300,0,90, 20);
             panel.add(back);
+
+            JButton checkout = new JButton( new AbstractAction("Checkout") {
+                @Override
+                public void actionPerformed( ActionEvent e ) {
+                    System.out.println("Checkout");
+                    if(!cart.getProductList().isEmpty()) {
+                        Checkout window = new Checkout(cl, contentPanel, cart);
+                        cart.clearCart();
+                        contentPanel.add(window.getPanel(), "checkout");
+                        cl.show(contentPanel, "checkout");
+                    }else{
+                        System.out.println("You have nothing in your cart!");
+                        header.setText("Your Cart is empty!");
+                    }
+                }
+            });
+            checkout.setBounds(1390,0,90, 20);
+            panel.add(checkout);
             panel.add(p2);
 
 

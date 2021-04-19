@@ -19,10 +19,10 @@ public class SellerUI {
         //label.setBounds();
 
         for(int i = 0;i<inventory.getList().size();i++){
-         JLabel item =  new JLabel(inventory.getProduct(i).getID());
-         //label.setBounds();
-         JLabel itemQuantity = new JLabel("Available: " + inventory.getProductQuantity(i));
-         //label.setBounds();
+            JLabel item =  new JLabel(inventory.getProduct(i).getID());
+            //label.setBounds();
+            JLabel itemQuantity = new JLabel("Available: " + inventory.getProductQuantity(i));
+            //label.setBounds();
             int currentItem = i;
             JButton restock = new JButton(new AbstractAction("+") {
                 @Override

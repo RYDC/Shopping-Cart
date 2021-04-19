@@ -32,7 +32,15 @@ public class CustomerUIMainWindow extends JFrame {
 
         //Footer
         JLabel footer = new JLabel("TO ADD AND REMOVE ITEMS PLEASE CLICK ON THE CART ICON OR WISHLIST ICON");
-        p2.add(footer, BorderLayout.SOUTH);
+        p1.add(footer, BorderLayout.SOUTH);
+
+        //TotalCost
+        JLabel cost;
+        if(!customers.isEmpty())
+            cost = new JLabel("Total Cost of Cart: $"+customers.get(0).getCart().getTotalCost());
+        else
+            cost = new JLabel("Total Cost of Cart: $0");
+        p2.add(cost,BorderLayout.SOUTH);
 
         //Logout Button
         JButton logout = new JButton(new AbstractAction("LOG OUT") {
@@ -50,7 +58,7 @@ public class CustomerUIMainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("View Cart Selected");
-                ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,customers.get(0).getCart(),inventory);
+                ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,customers.get(0).getCart(),inventory,customers);
                 contentPanel.add(currentCart.getPanel(),"current cart");
                 cl.show(contentPanel,"current cart");
             }
@@ -95,6 +103,7 @@ public class CustomerUIMainWindow extends JFrame {
                     //System.out.println("ROW IS: " + row+" COLUMN IS: " + column);
                     if (column == 2) {
                         currentCustomer.addToCart(row, inventory);
+                        cost.setText("Total Cost: $" + currentCustomer.getCart().getTotalCost());
                     } else if (column == 3) {
                         System.out.println("Attempting to add to wishlist");
                         ArrayList<Product> wishlist = currentCustomer.getWishlist();
