@@ -33,7 +33,7 @@ public class main {
         loginSelector loginSelectorPanel = new loginSelector(cl,contentPanel);
         CustomerLogin customerLoginPanel = new CustomerLogin(cl,contentPanel,customers);
         SellerLogin sellerLoginPanel = new SellerLogin(cl,contentPanel,sellers);
-        SellerUI sellerMenu = new SellerUI(cl,contentPanel,inventory);
+        SellerUI sellerMenu = new SellerUI(cl,contentPanel,inventory,customers);
         CustomerUIMainWindow customerMenu = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
 
         //Adding each panel into content panel

@@ -104,6 +104,8 @@ public class CustomerUIMainWindow extends JFrame {
                     if (column == 2) {
                         currentCustomer.addToCart(row, inventory);
                         cost.setText("Total Cost: $" + currentCustomer.getCart().getTotalCost());
+                        SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
+                        contentPanel.add(newMenu.getPanel(),"seller menu");
                     } else if (column == 3) {
                         System.out.println("Attempting to add to wishlist");
                         ArrayList<Product> wishlist = currentCustomer.getWishlist();

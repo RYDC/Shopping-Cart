@@ -42,9 +42,11 @@ public class Inventory {
         return stock.get(index);
     }
     public ArrayList<Product> getList(){return items;}
+    public ArrayList<Integer> getStockList(){return stock;}
     public int getStock(int index){
         return stock.get(index);
     }
+
 
 
 
