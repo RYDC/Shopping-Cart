@@ -1,8 +1,11 @@
 package DataObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
-public class Customer {
+/**
+ * @author Ryan Jbaili
+ */
+public class Customer implements Serializable {
     private String username,password;
     private ArrayList<Product> wishlist;
     private Cart shoppingCart;

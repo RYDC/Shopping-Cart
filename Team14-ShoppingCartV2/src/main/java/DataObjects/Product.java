@@ -1,9 +1,11 @@
 package DataObjects;
 
+import java.io.Serializable;
+
 /**
  * @author Ryan Jbaili
  */
-public class Product {
+public class Product implements Serializable {
     private String id;
     private double invPrice;
     private double sellPrice;

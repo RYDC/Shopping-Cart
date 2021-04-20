@@ -1,11 +1,12 @@
 package DataObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author Ryan Jbaili
  */
-public class Cart {
+public class Cart implements Serializable {
     private ArrayList<Product> items;
     private ArrayList<Integer> quantity;
     int selected_item;

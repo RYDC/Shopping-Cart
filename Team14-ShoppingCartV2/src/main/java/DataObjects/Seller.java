@@ -1,9 +1,11 @@
 package DataObjects;
 
+import java.io.Serializable;
+
 /**
  * @author Ryan Jbaili
  */
-public class Seller {
+public class Seller implements Serializable {
     private String username,password;
 
     public Seller(String u, String p) {

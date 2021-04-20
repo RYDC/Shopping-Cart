@@ -1,10 +1,11 @@
 package DataObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * @author Ryan Jbaili
  */
-public class Inventory {
+public class Inventory implements Serializable {
     private ArrayList<Product>items;
     private ArrayList<Integer> stock;
     private double cost;
