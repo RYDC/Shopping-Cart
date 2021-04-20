@@ -19,6 +19,8 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * @param item Product variable of item to be added
+     * @param quantity integer quantity of item to be added
      * invariant: added item remains the same
      * precondition: Valid product and quantity passed
      * postcondition: quantity is appended to stock and proudct is appended into items
@@ -29,6 +31,7 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * @param index current integer index of item to be removed
      * precondition: valid index is passed
      * postcondition: item is removed from items, quantity is removed from stock
      */
@@ -38,6 +41,8 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * @param index the integer index of the item to restock
+     * @param amount the integer amount to be restocked
      * precondition: Valid index and amount passed
      * postcondition: stock is increased by amount
      */
@@ -46,8 +51,11 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * @param index the integer index of the item to sold from inventory
+     * @param amount the integer amount to be restocked
      * precondition: Valid index and amount passed
      * postcondition: stock is either set to 0 if amount exceeds stock index or stock is decreased by amount
+     * @return true or false
      */
     public boolean sell(int index, int amount){
         if(stock.get(index)<amount){
@@ -60,6 +68,7 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * @param x the double for which cost will be set to
      * precondition: valid input
      * postcondition: cost is set to input
      */
@@ -68,6 +77,7 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * @param x the double for which revenue will be set to
      * precondition: valid input
      * postcondition: revenue is set to input
      */
@@ -77,7 +87,8 @@ public class Inventory implements Serializable {
 
     /**
      * invariant: cost remains unchanged
-     * postcondition: cost is returned
+     * postcondition: @return cost is returned
+     * @return cost
      */
     public double getCost(){
         return cost;
@@ -85,16 +96,19 @@ public class Inventory implements Serializable {
 
     /**
      * invariant: revenue remains unchanged
-     * postcondition: revenue is returned
+     * postcondition: @return revenue is returned
+     * @return revenue
      */
     public double getRevenue(){
         return revenue;
     }
 
     /**
+     * @param index the integer index of the product inside items
      * invariant: items remains unchanged, product remains unchanged
      * precondition: valid input
      * postcondition: indexed product is returned
+     * @return product at index
      */
     public Product getProduct(int index){
         return items.get(index);
@@ -102,19 +116,23 @@ public class Inventory implements Serializable {
 
     /**
      * invariant: items remains unchanged
-     * postcondition: items is returned
+     * postcondition: @return items is returned
+     * @return items
      */
     public ArrayList<Product> getList(){return items;}
 
     /**
      * invariant: stock remains unchanged
-     * postcondition: stock is returned
+     * postcondition: @return stock is returned
+     * @return stock
      */
     public ArrayList<Integer> getStockList(){return stock;}
 
     /**
+     * @param index the integer index of the product inside items
      * invariant: stock remains unchanged, indexed stock remains unchanged
-     * postcondition: stock index is returned
+     * postcondition: @return stock index is returned
+     * @return quantity at index
      */
     public int getStock(int index){
         return stock.get(index);

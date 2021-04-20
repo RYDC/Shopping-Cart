@@ -15,13 +15,15 @@ public class Seller implements Serializable {
 
     /**
      * invariant: username remains unchanged
-     * postcondition: username is returned
+     * postcondition: @return username is returned
+     * @return username
      */
     public String getUsername(){return username;}
 
     /**
      * invariant: password remains unchanged
-     * postcondition: password is returned
+     * postcondition: @return password is returned
+     * @return password
      */
     public String getPassword(){return password;}
 

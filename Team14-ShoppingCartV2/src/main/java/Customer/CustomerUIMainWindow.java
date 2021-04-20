@@ -15,7 +15,7 @@ import Seller.SellerUI;
 
 
 /**
- * @authors Suvosree Chatterjee, Ryan Jbaili
+ * @author Suvosree Chatterjee, Ryan Jbaili
  */
 
 //creating button for cart
@@ -166,6 +166,7 @@ public class CustomerUIMainWindow extends JFrame {
     /**
      * invariant: panel remains unchanged
      * postcondition: panel is returned
+     *  @return panel
      */
     public JPanel getPanel () {
         return p1;

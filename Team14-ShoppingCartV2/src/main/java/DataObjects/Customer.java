@@ -22,17 +22,21 @@ public class Customer implements Serializable {
 
     /**
      * invariant: username remains unchanged
-     * postcondition: username is returned
+     * postcondition: @return username is returned
+     * @return username
      */
     public String getUsername(){return username;}
 
     /**
      * invariant: password remains unchanged
-     * postcondition: password is returned
+     * postcondition: @return password is returned
+     * @return password
      */
     public String getPassword(){return password;}
 
     /**
+     * @param index the index of the item to add from inventory
+     * @param inventory inventory object
      * precondition: valid index and inventory provided
      * postcondition: product is added into shoppingCart
      */
@@ -41,6 +45,7 @@ public class Customer implements Serializable {
     }
 
     /**
+     * @param item Product object of the product to be added
      * invariant: product remains unchanged
      * precondition: valid product inputted
      * postcondition: product is added to wishlist
@@ -52,7 +57,8 @@ public class Customer implements Serializable {
 
     /**
      * invariant: wishlist remains unchanged
-     * postcondition: wishlist is returned
+     * postcondition: @return wishlist is returned
+     * @return wishlist
      */
     public ArrayList<Product> getWishlist(){
         return wishlist;
@@ -60,7 +66,8 @@ public class Customer implements Serializable {
 
     /**
      * invariant: shoppingCart remains unchanged
-     * postcondition: shoppingCart is returned
+     * postcondition: @return shoppingCart is returned
+     * @return shoppingCart
      */
     public Cart getCart(){return shoppingCart;}
 

@@ -20,25 +20,29 @@ public class Product implements Serializable {
 
     /**
      * invariant: sellPrice remains unchanged
-     * postcondition: sellPrice is returned
+     * postcondition: @return sellPrice is returned
+     * @return sellPrice
      */
     public double getSellPrice(){return sellPrice;}
 
     /**
      * invariant: sellPrice remains unchanged
-     * postcondition: sellPrice is returned
+     * postcondition: @return sellPrice is returned
+     * @return invPrice
      */
     public double getInvPrice(){return invPrice;}
 
     /**
      * invariant: id remains unchanged
-     * postcondition: id is returned
+     * postcondition: @return id is returned
+     * @return id
      */
     public String getID(){return id;}
 
     /**
      * invariant: description remains unchanged
-     * postcondition: description is returned
+     * postcondition: @return description is returned
+     * @return description
      */
     public String getDescription(){return description;}
 

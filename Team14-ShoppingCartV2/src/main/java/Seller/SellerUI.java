@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import Customer.CustomerUIMainWindow;
+import Customer.Product_Description;
 
 /**
- * @authors Ryan Jbaili
+ * @author Ryan Jbaili
  */
 public class SellerUI extends JFrame {
     JPanel p1;
@@ -124,6 +125,8 @@ public class SellerUI extends JFrame {
                         SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
                         contentPanel.add(newMenu.getPanel(),"seller menu");
                         cl.show(contentPanel,"seller menu");
+                    } else if (column == 0) {//View Product Description
+                        Product_Description product = new Product_Description(inventory.getProduct(row), inventory.getStock(row));
                     }
                 }
             }
@@ -135,6 +138,7 @@ public class SellerUI extends JFrame {
     /**
      * invariant: panel remains unchanged
      * postcondition: panel is returned
+     *  @return panel
      */
     public JPanel getPanel () {
         return p1;

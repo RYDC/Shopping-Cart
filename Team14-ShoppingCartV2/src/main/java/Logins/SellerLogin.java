@@ -1,5 +1,6 @@
 package Logins;
 
+import Customer.CustomerUIMainWindow;
 import DataObjects.Seller;
 
 import java.awt.*;
@@ -20,27 +21,27 @@ public class SellerLogin extends JFrame {
 
         //Setup up labels and fields
         JLabel label = new JLabel("Welcome Seller!");
-        label.setBounds(450,20,150,50);
+        label.setBounds(625,20,200,50);
         panel.add(label);
 
         JLabel user = new JLabel("Username");
-        user.setBounds(100,100,100,50);
+        user.setBounds(525,100,100,50);
         panel.add(user);
 
         JLabel pass = new JLabel("Password");
-        pass.setBounds(100,150,100,50);
+        pass.setBounds(525,150,100,50);
         panel.add(pass);
 
         JLabel error = new JLabel("");
-        error.setBounds(305,100,200,50);
+        error.setBounds(726,100,200,50);
         panel.add(error);
 
         JTextField userText = new JTextField();
-        userText.setBounds(200,100,100,50);
+        userText.setBounds(625,100,100,50);
         panel.add(userText);
 
         JPasswordField passText = new JPasswordField();
-        passText.setBounds(200,150,100,50);
+        passText.setBounds(625,150,100,50);
         panel.add(passText);
 
         //BUTTONS
@@ -74,7 +75,7 @@ public class SellerLogin extends JFrame {
                 }
             }
         });
-        loginBtn.setBounds(450,100,100,100);
+        loginBtn.setBounds(575,250,100,50);
         panel.add(loginBtn);
 
         JButton signupBtn = new JButton( new AbstractAction("Signup") {
@@ -107,15 +108,26 @@ public class SellerLogin extends JFrame {
 
             }
         });
-        signupBtn.setBounds(600,100,100,100);
+        signupBtn.setBounds(675,250,100,50);
         panel.add(signupBtn);
 
+        //Back Button
+        JButton back = new JButton( new AbstractAction("Back") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                System.out.println("Going Back");
+                cl.show(contentPanel,"start");
+            }
+        });
+        back.setBounds(1300,0,90, 20);
+        panel.add(back);
 
     }
 
     /**
      * invariant: panel remains unchanged
      * postcondition: panel is returned
+     *  @return panel
      */
     public JPanel getPanel(){
         return panel;

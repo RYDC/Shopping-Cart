@@ -20,7 +20,9 @@ public class Cart implements Serializable {
     }
 
     /**
-     * precondition: valid index and inventory provided
+     * @param index the index of the item to add from inventory
+     * @param available inventory object
+     * precondition:  valid index and inventory provided
      * postcondition: item from inventory is added to cart and removed from inventory quantity, totalcost is updated accordingly
      */
     public void add(int index,Inventory available){
@@ -36,6 +38,8 @@ public class Cart implements Serializable {
     }
 
     /**
+     * @param index the index of the item to add from inventory
+     * @param inventory inventory object
      * precondition: valid index and inventory provided
      * postcondition: product is removed from cart and added back to inventory, updating the quantity of the product removed
      */
@@ -65,7 +69,8 @@ public class Cart implements Serializable {
 
     /**
      * invariant: totalCost remains unchanged
-     * postcondition: returns totalCost
+     * postcondition: @return returns totalCost
+     * @return totalCost;
      */
     public int getTotalCost(){
         return totalCost;
@@ -73,13 +78,15 @@ public class Cart implements Serializable {
 
     /**
      * invariant: totalInv remains unchanged
-     * postcondition: returns totalInv
+     * postcondition: @return returns totalInv
+     * @return totalInv
      */
     public double getTotalInv() { return totalInv; }
 
     /**
      * invariant: items remains unchanged
-     * postcondition: items is returned
+     * postcondition: @return items is returned
+     * @return items
      */
     public ArrayList<Product> getProductList(){
         return items;
@@ -87,7 +94,8 @@ public class Cart implements Serializable {
 
     /**
      * invariant: quantity remains unchanged
-     * postcondition: quantity is returned
+     * postcondition: @return quantity is returned
+     * @return quantity
      */
     public ArrayList<Integer> getQuantityList(){
         return quantity;

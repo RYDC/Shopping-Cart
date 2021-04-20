@@ -76,6 +76,21 @@ public class Checkout {
             logout.setBounds(1390,0,90, 20);
             panel.add(logout);
 
+            //Back Button
+            JButton back = new JButton( new AbstractAction("Back") {
+                @Override
+                public void actionPerformed( ActionEvent e ) {
+                    System.out.println("Going Back");
+                    ViewCartUI newCart = new ViewCartUI(cl,contentPanel,cart,inventory,customers);
+                    contentPanel.add(newCart.getPanel(),"current cart");
+                    cl.show(contentPanel,"current cart");
+                }
+            });
+            back.setBounds(1300,0,90, 20);
+            panel.add(back);
+
+        }
+
             JButton cardBtn = new JButton( new AbstractAction("Supply Card Info and Complete Transaction") {
                 @Override
                 public void actionPerformed( ActionEvent e ) {
@@ -98,12 +113,15 @@ public class Checkout {
                 }
             });
             panel.add(cardBtn,BorderLayout.SOUTH);
-        }
+
+
+
         panel.add(p2);
     }
     /**
      * invariant: panel remains unchanged
      * postcondition: panel is returned
+     * @return panel
      */
     public JPanel getPanel(){
         return panel;

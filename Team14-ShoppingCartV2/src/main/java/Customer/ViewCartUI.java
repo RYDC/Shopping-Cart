@@ -123,6 +123,7 @@ public class ViewCartUI {
     /**
      * invariant: panel remains unchanged
      * postcondition: panel is returned
+     *  @return panel
      */
         public JPanel getPanel(){
             return panel;

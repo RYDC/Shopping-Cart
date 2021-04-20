@@ -15,7 +15,7 @@ public class LoginSelector extends JFrame {
 
         //Label
         JLabel label = new JLabel("Welcome, Which are you?");
-        label.setBounds(400,20,200,50);
+        label.setBounds(650,20,200,50);
         panel.add(label);
 
         //BUTTONS
@@ -27,7 +27,7 @@ public class LoginSelector extends JFrame {
                 cl.show(contentPanel,"customer login");
             }
         });
-        customerBtn.setBounds(350,100,100,100);
+        customerBtn.setBounds(625,100,100,50);
         panel.add(customerBtn);
 
         JButton sellerBtn = new JButton( new AbstractAction("Seller") {
@@ -38,7 +38,7 @@ public class LoginSelector extends JFrame {
                 cl.show(contentPanel,"seller login");
             }
         });
-        sellerBtn.setBounds(500,100,100,100);
+        sellerBtn.setBounds(725,100,100,50);
         panel.add(sellerBtn);
 
 
@@ -46,6 +46,7 @@ public class LoginSelector extends JFrame {
     /**
      * invariant: panel remains unchanged
      * postcondition: panel is returned
+     * @return panel
      */
     public JPanel getPanel(){
         return panel;

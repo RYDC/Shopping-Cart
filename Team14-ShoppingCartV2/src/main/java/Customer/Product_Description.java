@@ -12,7 +12,7 @@ public class Product_Description extends JFrame {
     JFrame frame;
     JPanel p1;
 
-    Product_Description (Product item, int quantity){
+    public Product_Description(Product item, int quantity){
         frame = new JFrame("DESCRIPTION");
         p1 = new JPanel(new BorderLayout());
         frame.add(p1);
