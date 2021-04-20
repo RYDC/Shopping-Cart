@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class main {
     public static void main(String[] args){
@@ -17,17 +19,24 @@ public class main {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(cl);
 
+        ArrayList<Customer> customers;
+        ArrayList<Seller> sellers;
+        Inventory inventory;
+
+        //Insert code to read from files here
+
         //DEFINE VARIABLES HERE TO PASS IN AS ARGUMENTS FOR CREATING PANELS
-         //Inventory... etc etc
-        ArrayList<Customer> customers = new ArrayList<Customer>();
-        ArrayList<Seller> sellers = new ArrayList<Seller>();
-        Inventory inventory = new Inventory();
+        //Inventory... etc etc
+        customers = new ArrayList<Customer>();
+        sellers = new ArrayList<Seller>();
+        inventory = new Inventory();
 
         //Hard Coded Items for Inventory
         Product apple = new Product("Apple",50,50,"Apple");
         inventory.add_item(apple,5);
         Product orange = new Product("Orange",50,50,"Orange");
         inventory.add_item(orange,5);
+
 
 
         //Creating each panel
@@ -48,8 +57,19 @@ public class main {
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.out.println("EXITING!");
+                /*String fileName = "Data.txt";
+                FileWriter fileWriter = null;
+                try {
+                    fileWriter = new FileWriter(fileName);
+                    PrintWriter printWriter = new PrintWriter(fileWriter);
+                    printWriter.print(inventory + "\n");
+                    printWriter.print(customers + "\n");
+                    printWriter.print(sellers + "\n");
+                    printWriter.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }*/
                 System.exit(0);
-
             }
         });
 
