@@ -93,13 +93,15 @@ public class CustomerUIMainWindow extends JFrame {
 
         //----------------- TABLE -----------------
         ArrayList<Product> products = inventory.getList();
-        String[] column = {"Product Name", "Price (USD)", "Add To Cart", "Add To Wishlist"};
-        Object[][] row = new Object[products.size()][4];
+        ArrayList<Integer> quantity = inventory.getStockList();
+        String[] column = {"Product Name", "Price (USD)", "Quantity","Add To Cart", "Add To Wishlist"};
+        Object[][] row = new Object[products.size()][5];
         for (int i = 0; i < products.size(); i++) {
             row[i][0] = products.get(i).getID();
             row[i][1] = products.get(i).getSellPrice();
-            row[i][2] = "Add to Cart";
-            row[i][3] = "Add to Wishlist";
+            row[i][2] = quantity.get(i);
+            row[i][3] = "Add to Cart";
+            row[i][4] = "Add to Wishlist";
         }
 
         //Model to prevent cells from being edited
@@ -125,13 +127,16 @@ public class CustomerUIMainWindow extends JFrame {
                     int row = target.getSelectedRow();
                     int column = target.getSelectedColumn();
                     //System.out.println("ROW IS: " + row+" COLUMN IS: " + column);
-                    if (column == 2) {//ADD TO CART SELECTED
+                    if (column == 3) {//ADD TO CART SELECTED
                         currentCustomer.addToCart(row, inventory);
                         cost.setText("Total Cost: $" + currentCustomer.getCart().getTotalCost());
-                        //Reloading SellerUI
+                        //Reloading SellerUI And CustomerUI
+                        CustomerUIMainWindow newCustomerMenu = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
                         SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
                         contentPanel.add(newMenu.getPanel(),"seller menu");
-                    } else if (column == 3) {//ADD TO WISHLIST SELECTED
+                        contentPanel.add(newCustomerMenu.getPanel(),"customer menu");
+                        cl.show(contentPanel,"customer menu");
+                    } else if (column == 4) {//ADD TO WISHLIST SELECTED
                         System.out.println("Attempting to add to wishlist");
                         ArrayList<Product> wishlist = currentCustomer.getWishlist();
                         int i = 0;
