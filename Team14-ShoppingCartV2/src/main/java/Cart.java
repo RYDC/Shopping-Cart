@@ -5,6 +5,7 @@ public class Cart {
     private ArrayList<Integer> quantity;
     int selected_item;
     int totalCost;
+    double totalInv;
 
     public Cart(){
         items = new ArrayList<Product>();
@@ -46,6 +47,7 @@ public class Cart {
     public int getTotalCost(){
         return totalCost;
     }
+    public double getTotalinv() { return totalInv; }
     public ArrayList<Product> getProductList(){
         return items;
     }

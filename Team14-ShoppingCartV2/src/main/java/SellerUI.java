@@ -60,9 +60,8 @@ public class SellerUI extends JFrame {
         JButton viewStatistics = new JButton(new AbstractAction("View Statistics") {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ViewStatistics view=new ViewStatistics(inventory );
                 System.out.println("View Statistics Selected");
-                //Add viewStats code here
-                //You will need to remake the view statistics panel everytime a checkout occurs
             }
         });
         viewStatistics.setBounds(1180, 10, 180, 20);

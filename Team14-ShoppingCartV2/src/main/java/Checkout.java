@@ -81,6 +81,8 @@ public class Checkout {
                     if(!transactionComplete) {
                         System.out.println("cardBtn clicked");
                         header.setText("Receipt:  Total: $" + cart.getTotalCost());
+                        inventory.setRevenue(inventory.getRevenue()+cart.getTotalCost());
+                        inventory.setCost(inventory.getCost()+cart.getTotalCost());
                         cart.clearCart();
                         transactionComplete = true;
                         CustomerUIMainWindow newCustomer = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);

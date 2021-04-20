@@ -4,6 +4,8 @@ public class Inventory {
     private ArrayList<Product>items;
     private ArrayList<Integer> stock;
     private int selected_item;
+    private double cost;
+    private double revenue;
 
     public Inventory(){
         items = new ArrayList<Product>();
@@ -33,6 +35,22 @@ public class Inventory {
             stock.set(index,stock.get(index)-amount);
             return true;
         }
+    }
+
+    public void setCost(double x){
+        cost = x;
+    }
+
+    public void setRevenue(double x){
+        revenue = x;
+    }
+
+    public double getCost(){
+        return cost;
+    }
+
+    public double getRevenue(){
+        return revenue;
     }
 
     public Product getProduct(int index){
