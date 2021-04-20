@@ -6,13 +6,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Ryan Jbaili
+ */
 public class main {
     public static void main(String[] args){
 
         //JFrame Setup
         JFrame frame = new JFrame();
         frame.setSize(1500,750);
-
 
         //Card Layout Setup
         CardLayout cl = new CardLayout();
@@ -26,7 +28,6 @@ public class main {
         //Insert code to read from files here
 
         //DEFINE VARIABLES HERE TO PASS IN AS ARGUMENTS FOR CREATING PANELS
-        //Inventory... etc etc
         customers = new ArrayList<Customer>();
         sellers = new ArrayList<Seller>();
         inventory = new Inventory();
@@ -36,8 +37,6 @@ public class main {
         inventory.add_item(apple,5);
         Product orange = new Product("Orange",50,50,"Orange");
         inventory.add_item(orange,5);
-
-
 
         //Creating each panel
         loginSelector loginSelectorPanel = new loginSelector(cl,contentPanel);
@@ -73,14 +72,7 @@ public class main {
             }
         });
 
-
-
         frame.add(contentPanel);
         frame.setVisible(true);
-
-
-
-
-
     }
 }

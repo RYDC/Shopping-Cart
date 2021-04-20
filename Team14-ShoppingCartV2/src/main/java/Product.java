@@ -1,3 +1,6 @@
+/**
+ * @author Ryan Jbaili
+ */
 public class Product {
     private String id;
     private double invPrice;
@@ -9,14 +12,24 @@ public class Product {
         invPrice = basePrice;
         sellPrice = storePrice;
         description = descript;
-
     }
 
-    public void setInvPrice(double price){invPrice = price;}
-    public void setSellPrice(double price){sellPrice = price;}
-    public double getInvPrice(){return invPrice;}
+    /**
+     * invariant: sellPrice remains unchanged
+     * postcondition: sellPrice is returned
+     */
     public double getSellPrice(){return sellPrice;}
+
+    /**
+     * invariant: id remains unchanged
+     * postcondition: id is returned
+     */
     public String getID(){return id;}
+
+    /**
+     * invariant: description remains unchanged
+     * postcondition: description is returned
+     */
     public String getDescription(){return description;}
 
 }

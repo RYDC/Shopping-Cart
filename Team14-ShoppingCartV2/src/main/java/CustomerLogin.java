@@ -2,15 +2,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-public class CustomerLogin extends JFrame implements ActionListener {
+/**
+ * @author Ryan Jbaili
+ */
+public class CustomerLogin extends JFrame{
     private JPanel panel;
     private ArrayList<Customer> customers;
 
     public CustomerLogin(CardLayout cl, JPanel contentPanel,ArrayList<Customer> customerList){
         customers = customerList;
-
         panel = new JPanel();
         panel.setLayout(null);
+
+        //Setup up labels and fields
         JLabel label = new JLabel("Welcome Customer!");
         label.setBounds(450,20,150,50);
         panel.add(label);
@@ -35,12 +39,15 @@ public class CustomerLogin extends JFrame implements ActionListener {
         passText.setBounds(200,150,100,50);
         panel.add(passText);
 
+
+        //BUTTONS
         JButton loginBtn = new JButton( new AbstractAction("Login") {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 System.out.println("Login Button clicked");
                 boolean match = false;
                 int i = 0;
+                //Searching through customers for matching username and password
                 while(!match && i<customers.size()){
                     if(userText.getText().equals(customers.get(i).getUsername()) && passText.getText().equals(customers.get(i).getPassword())) {
                         match = true;
@@ -48,16 +55,19 @@ public class CustomerLogin extends JFrame implements ActionListener {
                         i++;
                     }
                 }
-                if(match){
-                    //Moving current logged in customer to last index on array
+                if(match){//Successful login
+                    //Moving logged in user to the top of customers ArrayList for referencing
                     Customer holder = customers.get(i);
                     customers.remove(i);
                     customers.add(0,holder);
+
+                    //Clearing Textfields
                     userText.setText("");
                     passText.setText("");
                     error.setText("");
+                    //Sending user to customer menu
                     cl.show(contentPanel,"customer menu");
-                }else{
+                }else{//Failed Login
                     error.setText("Invalid Login");
                 }
             }
@@ -79,14 +89,15 @@ public class CustomerLogin extends JFrame implements ActionListener {
                     i++;
                 }
                 //System.out.println("Username is: '"+userText.getText()+"'");
-                if(taken){
+                if(taken){//If username is already taken
                     error.setText("Username already taken!");
-                }else if(userText.getText().equals("")) {
+                }else if(userText.getText().equals("")) {//If no username was entered
                     error.setText("Invalid Username!");
                     System.out.println("Invalid username");
-                }else{
+                }else{//Successful signup
                     customers.add(new Customer(userText.getText(),passText.getText()));
                     error.setText("Signed Up");
+                    //Clearing Textfields
                     userText.setText("");
                     passText.setText("");
                 }
@@ -95,16 +106,13 @@ public class CustomerLogin extends JFrame implements ActionListener {
         });
         signupBtn.setBounds(600,100,100,100);
         panel.add(signupBtn);
-
-
     }
 
+    /**
+     * invariant: panel remains unchanged
+     * postcondition: panel is returned
+     */
     public JPanel getPanel(){
         return panel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

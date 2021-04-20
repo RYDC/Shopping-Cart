@@ -9,8 +9,6 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @authors Ryan Jbaili
  */
-
-//creating button for cart
 public class SellerUI extends JFrame {
     JPanel p1;
     JPanel p2;
@@ -30,6 +28,7 @@ public class SellerUI extends JFrame {
         p2.setBounds(50, 300, 3000, 3000);
         p2.add(title, BorderLayout.NORTH);
 
+        //------------BUTTONS------------
 
         //Logout Button
         JButton logout = new JButton(new AbstractAction("LOG OUT") {
@@ -47,10 +46,8 @@ public class SellerUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Add Item Selected");
+                //Loading Add Item menu
                 AddItem newItem = new AddItem(cl,contentPanel,inventory,customers);
-                //ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,customers.get(0).getCart(),inventory,customers);
-                //contentPanel.add(currentCart.getPanel(),"current cart");
-                //cl.show(contentPanel,"current cart");
             }
         });
         addItem.setBounds(1090, 10, 90, 20);
@@ -60,8 +57,9 @@ public class SellerUI extends JFrame {
         JButton viewStatistics = new JButton(new AbstractAction("View Statistics") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ViewStatistics view=new ViewStatistics(inventory );
                 System.out.println("View Statistics Selected");
+                //Loading Statistics menu
+                ViewStatistics viewStatistics = new ViewStatistics(inventory);
             }
         });
         viewStatistics.setBounds(1180, 10, 180, 20);
@@ -78,38 +76,7 @@ public class SellerUI extends JFrame {
             row[i][2] = stock.get(i);
             row[i][3] = "Remove Item";
             row[i][4] = "Restock";
-
         }
-        JTable table = new JTable(row, column);
-
-        //Listener for interacting with the menu (add to wishlist, add to cart, view description)
-        table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JTable target = (JTable) e.getSource();
-                    int row = target.getSelectedRow();
-                    int column = target.getSelectedColumn();
-                    //System.out.println("ROW IS: " + row+" COLUMN IS: " + column);
-                    if (column == 3) {
-                        System.out.println("Removing " + inventory.getProduct(row).getID()+" from inventory!");
-                        inventory.remove_item(row);
-                        SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
-                        CustomerUIMainWindow newCustomerMenu = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
-                        contentPanel.add(newCustomerMenu.getPanel(),"customer menu");
-                        contentPanel.add(newMenu.getPanel(),"seller menu");
-                        cl.show(contentPanel,"seller menu");
-                    }else if(column == 4){
-                        //Add Restock Feature
-                        inventory.restock(row,1);
-                        SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
-                        contentPanel.add(newMenu.getPanel(),"seller menu");
-                        cl.show(contentPanel,"seller menu");
-                    }
-                }
-            }
-        });
-        table.setBorder(BorderFactory.createLineBorder(Color.black));
-        table.setRowHeight(30);
 
         //Model to prevent cells from being edited
         DefaultTableModel tableModel = new DefaultTableModel(row, column) {
@@ -119,13 +86,49 @@ public class SellerUI extends JFrame {
             }
         };
 
+        JTable table = new JTable(row, column);
+        table.setBorder(BorderFactory.createLineBorder(Color.black));
+        table.setRowHeight(30);
+
         table.setModel(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
+
+        //ACTION LISTENER FOR TABLE COLUMNS
+        table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {//2 Clicks activates a column listener
+                    JTable target = (JTable) e.getSource();
+                    int row = target.getSelectedRow();
+                    int column = target.getSelectedColumn();
+                    //System.out.println("ROW IS: " + row+" COLUMN IS: " + column);
+                    if (column == 3) {//REMOVE FROM INVENTORY SELECTED
+                        System.out.println("Removing " + inventory.getProduct(row).getID()+" from inventory!");
+                        inventory.remove_item(row);
+                        //Reloading SellerUI AND CustomerUIMainWindow
+                        SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
+                        CustomerUIMainWindow newCustomerMenu = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
+                        contentPanel.add(newCustomerMenu.getPanel(),"customer menu");
+                        contentPanel.add(newMenu.getPanel(),"seller menu");
+                        cl.show(contentPanel,"seller menu");
+                    }else if(column == 4){//RESTOCK SELECTED
+                        //Add Restock Feature
+                        inventory.restock(row,1);
+                        //Reloading SellerUI
+                        SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
+                        contentPanel.add(newMenu.getPanel(),"seller menu");
+                        cl.show(contentPanel,"seller menu");
+                    }
+                }
+            }
+        });
         p2.add(scrollPane, BorderLayout.CENTER);
         p1.add(p2);
 
     }
-
+    /**
+     * invariant: panel remains unchanged
+     * postcondition: panel is returned
+     */
     public JPanel getPanel () {
         return p1;
     }

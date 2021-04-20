@@ -42,6 +42,8 @@ public class CustomerUIMainWindow extends JFrame {
             cost = new JLabel("Total Cost of Cart: $0");
         p2.add(cost,BorderLayout.SOUTH);
 
+        //------------BUTTONS------------
+
         //Logout Button
         JButton logout = new JButton(new AbstractAction("LOG OUT") {
             @Override
@@ -58,6 +60,7 @@ public class CustomerUIMainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("View Cart Selected");
+                //Loading ViewCartUI
                 ViewCartUI currentCart = new ViewCartUI(cl,contentPanel,customers.get(0).getCart(),inventory,customers);
                 contentPanel.add(currentCart.getPanel(),"current cart");
                 cl.show(contentPanel,"current cart");
@@ -71,6 +74,7 @@ public class CustomerUIMainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Wishlist Selected");
+                //Loading Wishlist
                 Wishlist currentWishlist = new Wishlist(cl, contentPanel, customers.get(0).getWishlist());
                 contentPanel.add(currentWishlist.getPanel(), "wishlist");
                 cl.show(contentPanel, "wishlist");
@@ -88,48 +92,7 @@ public class CustomerUIMainWindow extends JFrame {
             row[i][1] = products.get(i).getSellPrice();
             row[i][2] = "Add to Cart";
             row[i][3] = "Add to Wishlist";
-
         }
-        JTable table = new JTable(row, column);
-
-        //Listener for interacting with the menu (add to wishlist, add to cart, view description)
-        table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                Customer currentCustomer = customers.get(0);
-                if (e.getClickCount() == 2) {
-                    JTable target = (JTable) e.getSource();
-                    int row = target.getSelectedRow();
-                    int column = target.getSelectedColumn();
-                    //System.out.println("ROW IS: " + row+" COLUMN IS: " + column);
-                    if (column == 2) {
-                        currentCustomer.addToCart(row, inventory);
-                        cost.setText("Total Cost: $" + currentCustomer.getCart().getTotalCost());
-                        SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
-                        contentPanel.add(newMenu.getPanel(),"seller menu");
-                    } else if (column == 3) {
-                        System.out.println("Attempting to add to wishlist");
-                        ArrayList<Product> wishlist = currentCustomer.getWishlist();
-                        int i = 0;
-                        boolean match = false;
-                        while (i < wishlist.size() && !match) {
-                            if (inventory.getProduct(row) == wishlist.get(i)) {
-                                match = true;
-                                System.out.println("Item already in wishlist. Removing..");
-                                wishlist.remove(i);
-                            }
-                            i++;
-                        }
-                        if (!match)
-                            currentCustomer.addToWishlist(inventory.getProduct(row));
-                    } else if (column == 0) {
-                        // JFrame Product_Description=new JFrame("Product Description");
-                        Product_Description product = new Product_Description(inventory.getProduct(row), inventory.getStock(row));
-                    }
-                }
-            }
-        });
-        table.setBorder(BorderFactory.createLineBorder(Color.black));
-        table.setRowHeight(30);
 
         //Model to prevent cells from being edited
         DefaultTableModel tableModel = new DefaultTableModel(row, column) {
@@ -139,13 +102,58 @@ public class CustomerUIMainWindow extends JFrame {
             }
         };
 
+        JTable table = new JTable(row, column);
+        table.setBorder(BorderFactory.createLineBorder(Color.black));
+        table.setRowHeight(30);
         table.setModel(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
+
+        //ACTION LISTENER FOR TABLE COLUMNS
+        table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                Customer currentCustomer = customers.get(0);
+                if (e.getClickCount() == 2) {//2 Clicks activates a column listener
+                    JTable target = (JTable) e.getSource();
+                    int row = target.getSelectedRow();
+                    int column = target.getSelectedColumn();
+                    //System.out.println("ROW IS: " + row+" COLUMN IS: " + column);
+                    if (column == 2) {//ADD TO CART SELECTED
+                        currentCustomer.addToCart(row, inventory);
+                        cost.setText("Total Cost: $" + currentCustomer.getCart().getTotalCost());
+                        //Reloading SellerUI
+                        SellerUI newMenu = new SellerUI(cl,contentPanel,inventory,customers);
+                        contentPanel.add(newMenu.getPanel(),"seller menu");
+                    } else if (column == 3) {//ADD TO WISHLIST SELECTED
+                        System.out.println("Attempting to add to wishlist");
+                        ArrayList<Product> wishlist = currentCustomer.getWishlist();
+                        int i = 0;
+                        boolean match = false;
+                        while (i < wishlist.size() && !match) {//Index through wishlist to see if item is already in wishlist
+                            if (inventory.getProduct(row) == wishlist.get(i)) {
+                                match = true;
+                                System.out.println("Item already in wishlist. Removing..");
+                                //Item was found in wishlist already, removing from wishlist
+                                wishlist.remove(i);
+                            }
+                            i++;
+                        }
+                        if (!match) //No match found, adding to wishlist
+                            currentCustomer.addToWishlist(inventory.getProduct(row));
+                    } else if (column == 0) {//View Product Description
+                        Product_Description product = new Product_Description(inventory.getProduct(row), inventory.getStock(row));
+                    }
+                }
+            }
+        });
         p2.add(scrollPane, BorderLayout.CENTER);
         p1.add(p2);
 
     }
 
+    /**
+     * invariant: panel remains unchanged
+     * postcondition: panel is returned
+     */
     public JPanel getPanel () {
         return p1;
     }

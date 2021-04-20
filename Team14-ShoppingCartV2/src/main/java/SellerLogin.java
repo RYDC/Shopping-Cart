@@ -2,15 +2,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-public class SellerLogin extends JFrame implements ActionListener {
+/**
+ * @author Ryan Jbaili
+ */
+public class SellerLogin extends JFrame {
     private JPanel panel;
     private ArrayList<Seller> sellers;
 
     public SellerLogin(CardLayout cl, JPanel contentPanel, ArrayList<Seller> sellerList){
         sellers = sellerList;
-
         panel = new JPanel();
         panel.setLayout(null);
+
+        //Setup up labels and fields
         JLabel label = new JLabel("Welcome Seller!");
         label.setBounds(450,20,150,50);
         panel.add(label);
@@ -35,12 +39,14 @@ public class SellerLogin extends JFrame implements ActionListener {
         passText.setBounds(200,150,100,50);
         panel.add(passText);
 
+        //BUTTONS
         JButton loginBtn = new JButton( new AbstractAction("Login") {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 System.out.println("Login Button clicked");
                 boolean match = false;
                 int i = 0;
+                //Searching through sellers for matching username and password
                 while(!match && i<sellers.size()){
                     if(userText.getText().equals(sellers.get(i).getUsername()) && passText.getText().equals(sellers.get(i).getPassword())) {
                         match = true;
@@ -48,14 +54,16 @@ public class SellerLogin extends JFrame implements ActionListener {
                         i++;
                     }
                 }
-                if(match){
-                    //Moving current logged in seller to last index on array
+                if(match){//Succesful login
+                    //Moving logged in user to the top of seller ArrayList for referencing
                     Seller holder = sellers.get(i);
                     sellers.remove(i);
                     sellers.add(holder);
+                    //Clearing Textfields
                     userText.setText("");
                     passText.setText("");
                     error.setText("");
+                    //Sending user to customer menu
                     cl.show(contentPanel,"seller menu");
                 }else{
                     error.setText("Invalid Login");
@@ -73,20 +81,22 @@ public class SellerLogin extends JFrame implements ActionListener {
                 //Loop through usernames to make sure it's not taken
                 boolean taken = false;
                 int i = 0;
+                //Loop through usernames to make sure it's not taken
                 while(!taken && i<sellers.size()){
                     if(userText.getText().equals(sellers.get(i).getUsername()))
                         taken = true;
                     i++;
                 }
                 //System.out.println("Username is: '"+userText.getText()+"'");
-                if(taken){
+                if(taken){//If username is already taken
                     error.setText("Username already taken!");
-                }else if(userText.getText().equals("")) {
+                }else if(userText.getText().equals("")) {//If no username was entered
                     error.setText("Invalid Username!");
                     System.out.println("Invalid username");
-                }else{
+                }else{//Successful signup
                     sellers.add(new Seller(userText.getText(),passText.getText()));
                     error.setText("Signed Up");
+                    //Clearing Textfields
                     userText.setText("");
                     passText.setText("");
                 }
@@ -99,12 +109,12 @@ public class SellerLogin extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * invariant: panel remains unchanged
+     * postcondition: panel is returned
+     */
     public JPanel getPanel(){
         return panel;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }

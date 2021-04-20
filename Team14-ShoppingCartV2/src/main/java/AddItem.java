@@ -3,10 +3,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 /**
- *
  * @author Ryan Jbaili, RealNub
  */
-public class AddItem extends JFrame implements ActionListener {
+public class AddItem extends JFrame {
     private JFrame frame;
     private JPanel panel;
 
@@ -14,6 +13,8 @@ public class AddItem extends JFrame implements ActionListener {
         frame = new JFrame("Add An Item");
         panel = new JPanel();
         panel.setLayout (null);
+
+        //Setting up all required fields
         JLabel label = new JLabel("New Item");
         label.setBounds (300,50,300,50);
         panel.add(label);
@@ -62,16 +63,25 @@ public class AddItem extends JFrame implements ActionListener {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 System.out.println("Add Item Button Selected");
+                //If All fields aside from description are filled out
                 if(!nameField.getText().equals("") && !invPriceField.getText().equals("") && !sellPriceField.getText().equals("") && !quantityField.getText().equals("")) {
+                    //Taking information from all textfields to define a new Product
                     inventory.add_item(new Product(nameField.getText(), Double.parseDouble(invPriceField.getText()),
                                     Double.parseDouble(sellPriceField.getText()), descriptionField.getText()),
                             Integer.parseInt(quantityField.getText()));
+
+                    //Reloading CustomerUIMainWindow
                     CustomerUIMainWindow newCustomer = new CustomerUIMainWindow(cl, contentPanel, inventory, customers);
                     contentPanel.add(newCustomer.getPanel(), "customer menu");
+
+                    //Reloading SellerUI
                     SellerUI newSeller = new SellerUI(cl, contentPanel, inventory, customers);
                     contentPanel.add(newSeller.getPanel(), "seller menu");
                     cl.show(contentPanel, "seller menu");
+
+                    //Exiting Frame
                     frame.dispose();
+
                 }else{
                     label.setText("Missing Required Fields, Try again");
                 }
@@ -79,19 +89,17 @@ public class AddItem extends JFrame implements ActionListener {
         });
         addItemBtn.setBounds (325,650,100,50);
         panel.add(addItemBtn);
-
-
         frame.add(panel);
         frame.setSize(750, 750);
         frame.setVisible(true);
     }
 
+    /**
+     * invariant: panel remains unchanged
+     * postcondition: panel is returned
+     */
     public JPanel getPanel() {
         return panel;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }

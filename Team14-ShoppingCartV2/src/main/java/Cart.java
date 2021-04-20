@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * @author Ryan Jbaili
+ */
 public class Cart {
     private ArrayList<Product> items;
     private ArrayList<Integer> quantity;
@@ -13,6 +16,10 @@ public class Cart {
         selected_item = 0;
     }
 
+    /**
+     * precondition: valid index and inventory provided
+     * postcondition: item from inventory is added to cart and removed from inventory quantity, totalcost is updated accordingly
+     */
     public void add(int index,Inventory available){
         if(available.sell(index,1)) {
             items.add(available.getProduct(index));
@@ -24,6 +31,10 @@ public class Cart {
         }
     }
 
+    /**
+     * precondition: valid index and inventory provided
+     * postcondition: product is removed from cart and added back to inventory, updating the quantity of the product removed
+     */
     public void remove(int index,Inventory inventory){
         totalCost-=items.get(index).getSellPrice();
         String restockID = items.get(index).getID();
@@ -38,19 +49,42 @@ public class Cart {
             i++;
         }
     }
+
+    /**
+     * postcondition: items, quantity, and totalCost are all reset
+     */
     public void clearCart(){
         items = new ArrayList<Product>();
         quantity = new ArrayList<Integer>();
         totalCost = 0;
     }
 
+    /**
+     * invariant: totalCost remains unchanged
+     * postcondition: returns totalCost
+     */
     public int getTotalCost(){
         return totalCost;
     }
-    public double getTotalinv() { return totalInv; }
+
+    /**
+     * invariant: totalInv remains unchanged
+     * postcondition: returns totalInv
+     */
+    public double getTotalInv() { return totalInv; }
+
+    /**
+     * invariant: items remains unchanged
+     * postcondition: items is returned
+     */
     public ArrayList<Product> getProductList(){
         return items;
     }
+
+    /**
+     * invariant: quantity remains unchanged
+     * postcondition: quantity is returned
+     */
     public ArrayList<Integer> getQuantityList(){
         return quantity;
     }

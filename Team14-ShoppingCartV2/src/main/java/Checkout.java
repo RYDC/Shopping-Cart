@@ -15,11 +15,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
+/**
+ * @author Ryan Jbaili
+ */
 public class Checkout {
     JPanel panel;
     JPanel p2;
-    JLabel header;
     ArrayList<Product> items;
     ArrayList<Integer> stock;
     boolean transactionComplete;
@@ -30,36 +31,28 @@ public class Checkout {
         panel.setLayout(new BorderLayout());
         p2.setLayout(new BorderLayout());
 
-        //header = new JLabel("Receipt:  Total: $" + cart.getTotalCost());
-        header = new JLabel("Total: $" + cart.getTotalCost());
+        //Header
+        JLabel header = new JLabel("Total: $" + cart.getTotalCost());
         header.setFont(new Font("Verdana", Font.BOLD, 15));
         header.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(header,BorderLayout.NORTH);
 
+        //Setting values
         items = cart.getProductList();
         stock = cart.getQuantityList();
         transactionComplete = false;
 
-        //Logout Button
-        JButton logout = new JButton(new AbstractAction("LOG OUT") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Logout selected");
-                cl.show(contentPanel, "start");
-            }
-        });
-        logout.setBounds(1390,0,90, 20);
-        panel.add(logout);
-
+        //Creating Table to display cart items
         if(items.isEmpty()){
             System.out.println("Cart is empty!");
-        }else{
+        }else{//Setting rows and columns
             String[] column = {"Product Name", "Price (USD)"};
             Object[][] row = new Object[items.size()][3];
             for(int i = 0,y = 100;i<items.size();i++,y+=50){
                 row[i][0] = items.get(i).getID();
                 row[i][1] = items.get(i).getSellPrice();
             }
+
             //Model to prevent cells from being edited
             DefaultTableModel tableModel = new DefaultTableModel(row,column) {
                 @Override
@@ -67,43 +60,55 @@ public class Checkout {
                     return false;
                 }
             };
+
+            //Table setup
             JTable table = new JTable(row,column);
             table.setModel(tableModel);
             table.setBorder(BorderFactory.createLineBorder(Color.black));
             table.setRowHeight(30);
-
             JScrollPane scrollPane = new JScrollPane(table);
             p2.add(scrollPane,BorderLayout.CENTER);
+
+            //BUTTONS
+            JButton logout = new JButton(new AbstractAction("LOG OUT") {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Logout selected");
+                    cl.show(contentPanel, "start");
+                }
+            });
+            logout.setBounds(1390,0,90, 20);
+            panel.add(logout);
 
             JButton cardBtn = new JButton( new AbstractAction("Supply Card Info and Complete Transaction") {
                 @Override
                 public void actionPerformed( ActionEvent e ) {
                     if(!transactionComplete) {
+                        //Transaction Complete sets it up so the user cannot checkout more than once with the current cart
                         System.out.println("cardBtn clicked");
                         header.setText("Receipt:  Total: $" + cart.getTotalCost());
+                        //Statistic Components
                         inventory.setRevenue(inventory.getRevenue()+cart.getTotalCost());
-                        inventory.setCost(inventory.getCost()+cart.getTotalCost());
+                        inventory.setCost(inventory.getCost()+cart.getTotalInv());
+
                         cart.clearCart();
                         transactionComplete = true;
+                        //Reloading CusterUIMainWindow
                         CustomerUIMainWindow newCustomer = new CustomerUIMainWindow(cl,contentPanel,inventory,customers);
                         contentPanel.add(newCustomer.getPanel(),"customer menu");
-                    }else{
+                    }else{//Checkout will print this after a checkout has already occured
                         System.out.println("Transaction is already Complete!");
                     }
                 }
             });
-            //cardBtn.setBounds(350,100,100,100);
             panel.add(cardBtn,BorderLayout.SOUTH);
-
-
-
         }
-
         panel.add(p2);
-
-
     }
-
+    /**
+     * invariant: panel remains unchanged
+     * postcondition: panel is returned
+     */
     public JPanel getPanel(){
         return panel;
     }
