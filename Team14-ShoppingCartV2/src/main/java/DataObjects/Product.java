@@ -23,6 +23,12 @@ public class Product {
     public double getSellPrice(){return sellPrice;}
 
     /**
+     * invariant: sellPrice remains unchanged
+     * postcondition: sellPrice is returned
+     */
+    public double getInvPrice(){return invPrice;}
+
+    /**
      * invariant: id remains unchanged
      * postcondition: id is returned
      */

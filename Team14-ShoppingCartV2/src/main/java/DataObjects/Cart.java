@@ -26,6 +26,7 @@ public class Cart {
         if(available.sell(index,1)) {
             items.add(available.getProduct(index));
             totalCost += available.getProduct(index).getSellPrice();
+            totalInv += available.getProduct(index).getInvPrice();
             System.out.println("Added " + available.getProduct(index).getID() + " to cart!");
             System.out.println("Total cost: " + totalCost);
         }else{
