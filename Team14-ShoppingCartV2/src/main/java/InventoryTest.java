@@ -1,3 +1,5 @@
+import DataObjects.Inventory;
+import DataObjects.Product;
 import org.junit.jupiter.api.Test;
 
 

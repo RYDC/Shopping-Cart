@@ -1,10 +1,19 @@
+import DataObjects.Customer;
+import DataObjects.Inventory;
+import DataObjects.Product;
+import DataObjects.Seller;
+import Logins.CustomerLogin;
+import Logins.LoginSelector;
+import Logins.SellerLogin;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import Customer.CustomerUIMainWindow;
+import Seller.SellerUI;
+
 
 /**
  * @author Ryan Jbaili
@@ -39,7 +48,7 @@ public class main {
         inventory.add_item(orange,5);
 
         //Creating each panel
-        loginSelector loginSelectorPanel = new loginSelector(cl,contentPanel);
+        LoginSelector loginSelectorPanel = new LoginSelector(cl,contentPanel);
         CustomerLogin customerLoginPanel = new CustomerLogin(cl,contentPanel,customers);
         SellerLogin sellerLoginPanel = new SellerLogin(cl,contentPanel,sellers);
         SellerUI sellerMenu = new SellerUI(cl,contentPanel,inventory,customers);
